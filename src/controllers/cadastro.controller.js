@@ -15,9 +15,14 @@ export async function cadastro(req, res) {
     const usuario = await usuarios.find({}).toArray();
 
     const verificador = usuario.find(verifica => verifica.email === req.body.email)
+    const verificadorcpf = usuario.find(verifica => verifica.cpf === req.body.cpf)
 
     if (verificador) {
         res.status(409).send("Já existe um usuario com este email!")
+        return
+    }
+    if(verificadorcpf){
+        res.status(409).send("Já existe um usuario com este CPF!")
         return
     }
     

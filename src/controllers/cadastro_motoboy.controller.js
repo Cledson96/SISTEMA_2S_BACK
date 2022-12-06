@@ -19,13 +19,17 @@ export async function cadastro_motoboy(req, res) {
     
     const motoboy = await motoboys.find({}).toArray();
 
-    const verificador = motoboy.find(verifica => verifica.cpf === req.body.cpf)
+    const verificador = motoboy.find(verifica => verifica.email === req.body.email)
+    const verificadorcpf = motoboy.find(verifica => verifica.cpf === req.body.cpf)
 
     if (verificador) {
         res.status(409).send("Já existe um colaborador com este email!")
         return
     }
-    
+    if(verificadorcpf){
+        res.status(409).send("Já existe um usuario com este CPF!")
+        return
+    }
     try {
        const resp = await motoboys.insertOne({ name, email, celular_principal,telefone_recado,endereco ,cpf,mei});
         res.status(201).send("colaborador cadastrado com sucesso!");
