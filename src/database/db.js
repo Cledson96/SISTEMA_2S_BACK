@@ -14,6 +14,7 @@ try {
 const db = mongoClient.db("Sistema_2S");
 
 export const usuarios = db.collection("usuarios");
+export const motoboys = db.collection("motoboys");
 export const sessao = db.collection("sessao");
 
 
