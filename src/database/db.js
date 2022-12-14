@@ -17,5 +17,5 @@ export const usuarios = db.collection("usuarios");
 export const motoboys = db.collection("motoboys");
 export const clientes = db.collection("clientes");
 export const sessao = db.collection("sessao");
-
+export const pedidos = db.collection("pedidos");
 
