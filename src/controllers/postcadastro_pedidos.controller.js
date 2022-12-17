@@ -22,7 +22,7 @@ export async function postcadastro_pedidos(req, res) {
     }
    
     try {
-       const resp = await pedidos.insertOne({ pedido, motoboy, login,data,cliente ,name});
+       const resp = await pedidos.insertOne({ pedido, motoboy, login,data,cliente ,name,status:"ok"});
         res.status(201).send("pedido cadastrado com sucesso!");
     } catch (err) {
         res.status(500).send(err);
