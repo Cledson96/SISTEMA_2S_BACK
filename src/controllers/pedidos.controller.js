@@ -22,7 +22,14 @@ export async function pedidoss(req, res) {
         } catch (err) {
             res.status(500).send(err);
         }
-    } 
+    } else if (req.headers.chave == "data" && req.headers.filtro){
+        registros = await pedidos.find({ data: {'$regex' : `${req.headers.filtro}`, '$options' : 'i'}}).toArray();
+        try {
+            res.status(200).send(registros);
+        } catch (err) {
+            res.status(500).send(err);
+        }
+    }
     else{
       
         registros = await pedidos.find({}).toArray();
