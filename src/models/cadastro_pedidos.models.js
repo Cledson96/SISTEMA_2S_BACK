@@ -6,7 +6,10 @@ export const cadastro_pedidosSchema = joi.object({
     login: joi.string().required().min(3),
     data: joi.string().min(3).required(),
     cliente: joi.string().required(),
-    name:joi.string()
+    name:joi.string(),
+    img:joi.string(),
+    qtd:joi.any()
+  
 
    
 });

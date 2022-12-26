@@ -2,7 +2,9 @@ import { cadastro_pedidosSchema } from "../models/cadastro_pedidos.models.js";
 import { pedidos } from "../database/db.js"
 
 export async function postcadastro_pedidos(req, res) {
-    const { pedido,motoboy,login, data, cliente,name } = req.body;
+    const { pedido,motoboy,login, data, cliente,name,img,qtd } = req.body;
+    let qtds
+   
 
     const validation = cadastro_pedidosSchema.validate(req.body, { abortEarly: false });
     if (validation.error) {
@@ -10,7 +12,11 @@ export async function postcadastro_pedidos(req, res) {
         return
     }
     
-       
+    if (qtd == "not"){
+        qtds = 1
+    } else{
+        qtds = qtd
+    }
     const tdspedidos = await pedidos.find({motoboy : motoboy}).toArray();
 
     const verificador = tdspedidos.find(verifica => verifica.pedido === pedido)
@@ -22,7 +28,7 @@ export async function postcadastro_pedidos(req, res) {
     }
    
     try {
-       const resp = await pedidos.insertOne({ pedido, motoboy, login,data,cliente ,name,status:"ok"});
+       const resp = await pedidos.insertOne({ pedido, motoboy, login,data,cliente ,name,status:"ok",img,qtd:qtds});
         res.status(201).send("pedido cadastrado com sucesso!");
     } catch (err) {
         res.status(500).send(err);
