@@ -2,7 +2,7 @@ import { cadastro_pedidosSchema } from "../models/cadastro_pedidos.models.js";
 import { pedidos } from "../database/db.js"
 
 export async function postcadastro_pedidos(req, res) {
-    const { pedido,motoboy,login, data, cliente,name,img,qtd } = req.body;
+    const { pedido,motoboy,login, data, cliente,name,img,qtd,horas,ausente} = req.body;
     let qtds
    
 
@@ -28,7 +28,7 @@ export async function postcadastro_pedidos(req, res) {
     }
    
     try {
-       const resp = await pedidos.insertOne({ pedido, motoboy, login,data,cliente ,name,status:"ok",img,qtd:qtds});
+       const resp = await pedidos.insertOne({ pedido, motoboy, login,data,cliente ,name,status:"ok",img,qtd:qtds,horas,ausente});
         res.status(201).send("pedido cadastrado com sucesso!");
     } catch (err) {
         res.status(500).send(err);
