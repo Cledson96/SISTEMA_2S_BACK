@@ -12,12 +12,16 @@ export async function ausente(req, res) {
         return
     }
 
+if (mensage.ausente >= mensage.qtd){
+    res.status(404).send("Pedido ja cadastrado como ausente")
+    return
+}
 
-    console.log(id)
-    try {
 
-        await pedidos.updateOne({ _id: new ObjectId(id) }, { $set: { "status":"ausente" } });
-        res.send("ausente cadastrado com sucesso!");
+      try {
+
+        await pedidos.updateOne({ _id: new ObjectId(id) }, { $set: { "ausente": mensage.ausente + 1 } });
+        res.send("ausente cadastrado com sucesso!");    
     } catch (err) {
         console.log(err);
         res.sendStatus(404);
